@@ -1,19 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { getExercise } = require('../controller/exerciseController')
+const { getExercise, setExercise, updateExercise, deleteExercise } = require('../controller/exerciseController')
 
-router.get('/', getExercise)
+router.route('/').get(getExercise).post(setExercise)
 
-router.post('/', (req, res) => {
-    res.status(200).json({ message: 'Set exercise' })
-})
-
-router.put('/:id', (req, res) => {
-    res.status(200).json({ message: `Update exercise ${req.params.id}` })
-})
-
-router.delete('/:id', (req, res) => {
-    res.status(200).json({ message: `Delete exercise ${req.params.id}` })
-})
+router.route('/:id').put(updateExercise).delete(deleteExercise)
 
 module.exports = router
