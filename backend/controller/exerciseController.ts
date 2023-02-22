@@ -1,10 +1,11 @@
 import asyncHandler from 'express-async-handler'
+import { Request, Response } from 'express'
 
 // @desc: Get all exercises
 // @route: GET /api/exercises
 // @access: Private
 
-export const getExercise = asyncHandler(async (req, res) => {
+export const getExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ message: 'Get exercise' })
 })
 
@@ -12,7 +13,7 @@ export const getExercise = asyncHandler(async (req, res) => {
 // @route: POST /api/exercises
 // @access: Private
 
-export const setExercise = asyncHandler(async (req, res) => {
+export const setExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     if (!req.body.text) {
         res.status(400)
         throw new Error('Please add a text field')
@@ -24,7 +25,7 @@ export const setExercise = asyncHandler(async (req, res) => {
 // @route: PUT /api/exercises/:id
 // @access: Private
 
-export const updateExercise = asyncHandler(async (req, res) => {
+export const updateExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ message: `Update exercise ${req.params.id}` })
 })
 
@@ -32,6 +33,6 @@ export const updateExercise = asyncHandler(async (req, res) => {
 // @route: DELETE /api/exercises/:id
 // @access: Private
 
-export const deleteExercise = asyncHandler(async (req, res) => {
+export const deleteExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     res.status(200).json({ message: `Delete exercise ${req.params.id}` })
 })

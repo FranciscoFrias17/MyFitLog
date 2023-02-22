@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "Fitness tracker app ",
     "main": "server.js",
-    "type": "module",
     "scripts": {
-        "start": "node backend/server.js",
-        "server": "nodemon backend/server.js",
+        "start": "node backend/server.ts",
+        "server": "nodemon backend/server.ts",
+        "build": "tsc --build",
         "lint": "eslint --ext .js,.ts,.tsx .",
         "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write"
     },
