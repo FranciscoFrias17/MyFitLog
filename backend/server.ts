@@ -6,7 +6,6 @@ import exerciseRoutes from './routes/exerciseRoutes'
 
 dotenv.config()
 const port = process.env.PORT
-
 connectDB()
 
 const app: Application = express()

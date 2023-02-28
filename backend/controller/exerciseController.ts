@@ -1,12 +1,14 @@
 import asyncHandler from 'express-async-handler'
 import { Request, Response } from 'express'
+import Exercise from '../models/exerciseModel'
 
 // @desc: Get all exercises
 // @route: GET /api/exercises
 // @access: Private
 
 export const getExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    res.status(200).json({ message: 'Get exercise' })
+    const exercises = await Exercise.find({})
+    res.status(200).json(exercises)
 })
 
 // @desc: Set an exercise
@@ -18,7 +20,16 @@ export const setExercise = asyncHandler(async (req: Request, res: Response): Pro
         res.status(400)
         throw new Error('Please add a text field')
     }
-    res.status(200).json({ message: 'Set exercise' })
+
+    const exercise = new Exercise({
+        exerciseId: req.body.exerciseId,
+        exerciseName: req.body.exerciseName,
+        exerciseDescription: req.body.exerciseDescription,
+        sets: req.body.sets,
+        weight: req.body.weight,
+        weightType: req.body.weightType,
+    })
+    res.status(200).json(exercise)
 })
 
 // @desc: Update an exercise
@@ -26,7 +37,16 @@ export const setExercise = asyncHandler(async (req: Request, res: Response): Pro
 // @access: Private
 
 export const updateExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    res.status(200).json({ message: `Update exercise ${req.params.id}` })
+    const exercise = await Exercise.findById(req.params.id)
+
+    if (!exercise) {
+        res.status(400)
+        throw new Error('Exercise not found')
+    }
+
+    const updatedExercise = await Exercise.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+    res.status(200).json(updatedExercise)
 })
 
 // @desc: Delete an exercise
@@ -34,5 +54,13 @@ export const updateExercise = asyncHandler(async (req: Request, res: Response): 
 // @access: Private
 
 export const deleteExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    res.status(200).json({ message: `Delete exercise ${req.params.id}` })
+    const exercise = await Exercise.findById(req.params.id)
+
+    if (!exercise) {
+        res.status(400)
+        throw new Error('Exercise not found')
+    }
+
+    await exercise.remove()
+    res.status(200).json({ id: req.params.id })
 })
