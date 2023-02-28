@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 // @desc: Register a user
 // @route: POST /api/users
