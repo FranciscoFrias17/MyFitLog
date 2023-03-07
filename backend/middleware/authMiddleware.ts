@@ -3,6 +3,14 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/userModel'
 import { Request, Response, NextFunction } from 'express'
 
+declare global {
+    namespace Express {
+        interface Request {
+            user?: any
+        }
+    }
+}
+
 export const protect = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     let token
 
