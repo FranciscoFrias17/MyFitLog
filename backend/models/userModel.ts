@@ -1,6 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema, model, Types } from 'mongoose'
 
-const userSchema = new mongoose.Schema(
+interface IUser {
+    name: string
+    email: string
+    password: string
+    birthdate: Date
+    _id: mongoose.Types.ObjectId
+}
+
+const userSchema = new Schema<IUser>(
     {
         name: {
             type: String,
@@ -17,7 +25,7 @@ const userSchema = new mongoose.Schema(
         },
         birthdate: {
             type: Date,
-            required: [true, 'Please enter your birthdate'],
+            required: [false, 'Please enter your birthdate'],
         },
     },
     {
@@ -25,4 +33,4 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model('User', userSchema)
+export default model<IUser>('User', userSchema)

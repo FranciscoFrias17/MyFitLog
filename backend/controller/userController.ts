@@ -35,18 +35,18 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
         birthdate,
     })
 
-    if (user) {
-        res.status(201).json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            birthdate: user.birthdate,
-            token: generateToken(user._id),
-        })
-    } else {
+    if (!user) {
         res.status(400)
         throw new Error('Invalid user data')
     }
+
+    res.status(201).json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        birthdate: user.birthdate,
+        token: generateToken(user._id),
+    })
 })
 
 // @desc: Authenticate a user
@@ -57,24 +57,45 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 
     // Check for user email
     const user = await User.findOne({ email })
-    if (user && (await bcrypt.compare(password, user.password))) {
-        res.json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id),
-        })
-    } else {
-        res.status(400)
+    if (!user) {
+        res.status(401)
         throw new Error('Invalid email or password')
     }
+
+    // Check for password
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+        res.status(401)
+        throw new Error('Invalid email or password')
+    }
+
+    res.status(200).json({
+        _id: user.id,
+        name: user.name,
+        email: user.email,
+        birthdate: user.birthdate,
+        token: generateToken(user._id),
+    })
 })
 
 // @desc: Get user profile
 // @route: GET /api/users/me
 // @access: Private
 export const getMe = asyncHandler(async (req: Request, res: Response) => {
-    res.json({ message: 'Personal profile' })
+    const user = await User.findById(req.user.id)
+
+    if (!user) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    const { _id, name, email } = user
+
+    res.status(200).json({
+        id: _id,
+        name,
+        email,
+    })
 })
 
 // Generate JWT

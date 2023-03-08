@@ -1,8 +1,17 @@
-import mongoose from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
-const exerciseSchema = new mongoose.Schema({
+interface IExercise {
+    exerciseId: Types.ObjectId
+    exerciseName: string
+    exerciseDescription: string
+    sets: Types.ObjectId
+    weight: number
+    weightType: string
+}
+
+const exerciseSchema = new Schema({
     exerciseId: {
-        type: String,
+        type: Types.ObjectId,
         required: true,
         unique: true,
     },
@@ -15,7 +24,7 @@ const exerciseSchema = new mongoose.Schema({
         required: true,
     },
     sets: {
-        type: Number,
+        type: Types.ObjectId,
         required: true,
     },
     weight: {
@@ -28,4 +37,4 @@ const exerciseSchema = new mongoose.Schema({
     },
 })
 
-export default mongoose.model('Exercise', exerciseSchema)
+export default model<IExercise>('Exercise', exerciseSchema)
