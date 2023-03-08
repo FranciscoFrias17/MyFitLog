@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose'
+import mongoose, { Schema, model, Types } from 'mongoose'
 
 interface IExercise {
     exerciseId: Types.ObjectId
