@@ -20,7 +20,7 @@ const measurementSchema = new Schema<IMeasurement>(
         },
         bmi: {
             type: Number,
-            required: true,
+            required: false,
         },
         date: {
             type: Date,
