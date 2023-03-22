@@ -7,7 +7,7 @@ import Exercise from '../models/exerciseModel'
 // @access: Private
 
 export const getExercise = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    const exercises = await Exercise.find({})
+    const exercises = await Exercise.find({ user: req.user._id })
     res.status(200).json(exercises)
 })
 
