@@ -1,14 +1,14 @@
 import mongoose, { Schema, model, Types } from 'mongoose'
 
 interface ISession {
-    userId: mongoose.Types.ObjectId
+    userId: Types.ObjectId
     date: Date
-    _id: mongoose.Types.ObjectId
+    _id: Types.ObjectId
 }
 
 const sessionSchema = new Schema<ISession>({
     userId: {
-        type: Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
     },
     date: {

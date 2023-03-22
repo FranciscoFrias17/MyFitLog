@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Types } from 'mongoose'
 
 interface ISet {
-    exerciseId: mongoose.Types.ObjectId
+    exerciseId: Types.ObjectId
     exerciseName: string
     exerciseDescription: string
     sets: Types.ObjectId
@@ -13,7 +13,7 @@ interface ISet {
 const setSchema = new Schema<ISet>(
     {
         exerciseId: {
-            type: Types.ObjectId,
+            type: Schema.Types.ObjectId,
             required: true,
             unique: true,
         },
@@ -26,7 +26,7 @@ const setSchema = new Schema<ISet>(
             required: true,
         },
         sets: {
-            type: Types.ObjectId,
+            type: Schema.Types.ObjectId,
             required: true,
         },
         weight: {
@@ -38,7 +38,7 @@ const setSchema = new Schema<ISet>(
             required: true,
         },
         userId: {
-            type: Types.ObjectId,
+            type: Schema.Types.ObjectId,
             required: true,
         },
     },
