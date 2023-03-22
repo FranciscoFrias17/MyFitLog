@@ -6,6 +6,7 @@
     "scripts": {
         "start": "node backend/server.ts",
         "server": "nodemon backend/server.ts",
+        "client": "npm start --prefix frontend",
         "build": "tsc --build",
         "lint": "eslint --ext .js,.ts,.tsx .",
         "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write"
