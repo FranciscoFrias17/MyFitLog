@@ -4,7 +4,7 @@ interface IUser {
     name: string
     email: string
     password: string
-    birthdate: Date
+    birthdate?: Date
     _id: mongoose.Types.ObjectId
 }
 

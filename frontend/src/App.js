@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header.tsx'
-import Dashboard from './pages/Dashboard.tsx'
-import Login from './pages/Login.tsx'
-import Register from './pages/Register.tsx'
+import Header from './components/Header.jsx'
+import Dashboard from './pages/Dashboard.jsx'
+import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
 
 function App() {
     return (

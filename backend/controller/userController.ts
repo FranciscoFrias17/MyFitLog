@@ -9,9 +9,9 @@ import { ObjectId } from 'mongodb'
 // @route: POST /api/users
 // @access: Public
 export const registerUser = asyncHandler(async (req: Request, res: Response) => {
-    const { name, email, password, birthdate } = req.body
+    const { name, email, password } = req.body
 
-    if (!name || !email || !password || !birthdate) {
+    if (!name || !email || !password) {
         res.status(400)
         throw new Error('Please fill in all fields')
     }
@@ -32,7 +32,6 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
         name,
         email,
         password: hashedPassword,
-        birthdate,
     })
 
     if (!user) {

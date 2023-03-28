@@ -10,14 +10,14 @@ function Login() {
 
     const { email, password } = formData
 
-    const onChange = (e: { target: { name: any; value: any } }) => {
+    const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value,
         }))
     }
 
-    const onSubmit = (e: { preventDefault: () => void }) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
     }
